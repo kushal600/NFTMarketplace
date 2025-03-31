@@ -9,6 +9,7 @@ import Marketplace from "./components/Marketplace";
 import Profile from "./components/Profile";
 import NFTPage from "./components/NFTpage";
 import UpdateNFT from "./components/UpdateNFT";
+import Auth from "./components/Auth";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -19,6 +20,7 @@ root.render(
         <Route path="/nftPage/:tokenId" element={<NFTPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/updateNFT" element={<UpdateNFT />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
