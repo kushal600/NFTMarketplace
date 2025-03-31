@@ -1,11 +1,10 @@
+require("dotenv").config();
 const functions = require("firebase-functions/v1"); // Use v1 explicitly
 const admin = require("firebase-admin");
 const sgMail = require("@sendgrid/mail");
 
 admin.initializeApp();
-sgMail.setApiKey(
-  "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"
-); // Replace with your API key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 exports.sendPriceChangeEmail = functions.firestore
   .document("nfts/{tokenId}")
