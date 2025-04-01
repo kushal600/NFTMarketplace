@@ -14,32 +14,6 @@ import { auth } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  // testFirestore();
-  // const [user, setUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   console.log("App useEffect: Checking auth state...");
-  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     console.log(
-  //       "Auth state changed:",
-  //       currentUser ? currentUser.email : "No user"
-  //     );
-  //     setUser(currentUser);
-  //     setLoading(false);
-  //   });
-  //   return () => {
-  //     console.log("Cleaning up auth listener");
-  //     unsubscribe();
-  //   };
-  // }, []);
-
-  // if (loading) {
-  //   console.log("App rendering: Loading...");
-  //   return <div>Loading...</div>;
-  // }
-
-  // console.log("App rendering with user:", user ? user.email : "No user");
   return (
     <div className="container">
       {/* <Navbar user={user} /> */}
@@ -51,25 +25,6 @@ function App() {
         <Route path="/updateNFT" element={<UpdateNFT />} />
         <Route path="/auth" element={<Auth />} />
       </Routes>
-      {/* <Routes>
-        {user ? (
-          <>
-            <Route path="/" element={<Marketplace />} />
-            <Route path="/nftPage" element={<NFTPage />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/sellNFT" element={<SellNFT />} />
-            <Route path="/updateNFT" element={<UpdateNFT />} />
-            <Route path="*" element={<Navigate to="/" />} />{" "}
-           
-          </>
-        ) : (
-          <>
-            <Route path="/auth" element={<Auth setUser={setUser} />} />
-            <Route path="*" element={<Navigate to="/auth" />} />{" "}
-          
-          </>
-        )}
-      </Routes> */}
     </div>
   );
 }
