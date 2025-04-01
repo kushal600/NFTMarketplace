@@ -4,8 +4,7 @@ import MarketplaceJSON from "../Marketplace.json";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { GetIpfsUrlFromPinata } from "../utils";
-import { auth, db } from "../firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { auth } from "../firebase";
 
 export default function Marketplace() {
   // const sampleData = [
@@ -90,59 +89,6 @@ export default function Marketplace() {
     updateData(items);
   }
 
-  // Add to watchlist
-  async function addToWatchlist(tokenId) {
-    if (!user) {
-      alert("Please sign in to add to watchlist");
-      return;
-    }
-    try {
-      const watchlistRef = doc(db, "watchlists", user.uid);
-      const watchlistDoc = await getDoc(watchlistRef);
-      const currentWatchlist = watchlistDoc.exists()
-        ? watchlistDoc.data().tokenIds || []
-        : [];
-      if (!currentWatchlist.includes(tokenId.toString())) {
-        const updatedWatchlist = [...currentWatchlist, tokenId.toString()];
-        await setDoc(
-          watchlistRef,
-          { tokenIds: updatedWatchlist },
-          { merge: true }
-        );
-        alert(`Added Token ID ${tokenId} to watchlist!`);
-      } else {
-        alert(`Token ID ${tokenId} is already in your watchlist`);
-      }
-    } catch (error) {
-      console.error("Error adding to watchlist:", error);
-    }
-  }
-
-  // Remove from watchlist
-  async function removeFromWatchlist(tokenId) {
-    if (!user) {
-      alert("Please sign in to remove from watchlist");
-      return;
-    }
-    try {
-      const watchlistRef = doc(db, "watchlists", user.uid);
-      const watchlistDoc = await getDoc(watchlistRef);
-      const currentWatchlist = watchlistDoc.exists()
-        ? watchlistDoc.data().tokenIds || []
-        : [];
-      const updatedWatchlist = currentWatchlist.filter(
-        (id) => id !== tokenId.toString()
-      );
-      await setDoc(
-        watchlistRef,
-        { tokenIds: updatedWatchlist },
-        { merge: true }
-      );
-      alert(`Removed Token ID ${tokenId} from watchlist!`);
-    } catch (error) {
-      console.error("Error removing from watchlist:", error);
-    }
-  }
   if (!dataFetched) getAllNFTs();
 
   return (
@@ -151,26 +97,9 @@ export default function Marketplace() {
       <div className="flex flex-col place-items-center mt-20">
         <div className="md:text-xl font-bold text-white">Top NFTs</div>
         <div className="flex mt-5 justify-between flex-wrap max-w-screen-xl text-center">
-          {/* {data.map((value, index) => {
+          {data.map((value, index) => {
             return <NFTTile data={value} key={index}></NFTTile>;
-          })} */}
-          {data.map((value, index) => (
-            <div key={index} className="flex flex-col items-center">
-              <NFTTile data={value} />
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded mt-2"
-                onClick={() => addToWatchlist(value.tokenId)}
-              >
-                Add to Watchlist
-              </button>
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded mt-2"
-                onClick={() => removeFromWatchlist(value.tokenId)}
-              >
-                Remove from Watchlist
-              </button>
-            </div>
-          ))}
+          })}
         </div>
       </div>
     </div>
