@@ -10,8 +10,9 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 function Navbar() {
   const [connected, toggleConnect] = useState(false);
@@ -48,15 +49,60 @@ function Navbar() {
   //   return () => unsubscribe();
   // }, []);
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     if (!currentUser) {
+  //       setWalletAddress(null); // Reset wallet when signed out
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      if (!currentUser) {
-        setWalletAddress(null); // Reset wallet when signed out
+      if (currentUser) {
+        // Fetch wallet address from Firebase
+        const userDocRef = doc(db, "users", currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          setWalletAddress(data.walletAddress || null);
+        } else {
+          setWalletAddress(null); // No wallet yet if doc doesn’t exist
+        }
+      } else {
+        setWalletAddress(null); // Reset when signed out
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, []); // Runs on mount and auth state changes
+
+  // async function connectWallet() {
+  //   if (!window.ethereum) {
+  //     alert("Please install MetaMask to connect!");
+  //     return;
+  //   }
+  //   try {
+  //     const chainId = await window.ethereum.request({ method: "eth_chainId" });
+  //     if (chainId !== "0xaa36a7") {
+  //       await window.ethereum.request({
+  //         method: "wallet_switchEthereumChain",
+  //         params: [{ chainId: "0xaa36a7" }],
+  //       });
+  //     }
+  //     const ethers = require("ethers");
+  //     const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //     await provider.send("eth_requestAccounts", []);
+  //     const signer = provider.getSigner();
+  //     const address = await signer.getAddress();
+  //     setWalletAddress(address);
+  //   } catch (error) {
+  //     console.error("Wallet connection failed:", error);
+  //     alert("Failed to connect wallet: " + error.message);
+  //   }
+  // }
 
   async function connectWallet() {
     if (!window.ethereum) {
@@ -77,11 +123,20 @@ function Navbar() {
       const signer = provider.getSigner();
       const address = await signer.getAddress();
       setWalletAddress(address);
+      // Store in Firebase if user is authenticated
+      if (user) {
+        await setDoc(
+          doc(db, "users", user.uid),
+          { walletAddress: address },
+          { merge: true }
+        );
+      }
     } catch (error) {
       console.error("Wallet connection failed:", error);
       alert("Failed to connect wallet: " + error.message);
     }
   }
+
   async function getAddress() {
     console.log("Connect button clicked");
     const ethers = require("ethers");

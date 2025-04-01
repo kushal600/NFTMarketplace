@@ -17,21 +17,6 @@ export default function Auth() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // async function connectWalletAndSave(user) {
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   await provider.send("eth_requestAccounts", []);
-  //   const signer = provider.getSigner();
-  //   const walletAddress = await signer.getAddress();
-  //   await setDoc(
-  //     doc(db, "users", user.uid),
-  //     {
-  //       email: user.email,
-  //       walletAddress: walletAddress,
-  //     },
-  //     { merge: true }
-  //   );
-  //   return walletAddress;
-  // }
   async function connectWallet() {
     try {
       if (!window.ethereum) {
