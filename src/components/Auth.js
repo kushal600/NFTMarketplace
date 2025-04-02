@@ -172,6 +172,7 @@ export default function Auth() {
   // );
 
   return (
+
     // <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-4">
     //   {user ? (
     //     <div className="bg-gray-800 rounded-lg shadow-lg p-6 max-w-md w-full text-center transform transition-all duration-300 hover:scale-105">
@@ -515,11 +516,24 @@ export default function Auth() {
           <button
             onClick={signOutUser}
             className="mt-6 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold py-2 px-6 rounded-full hover:from-red-600 hover:to-red-800 transition-all duration-200 shadow-[0_0_10px_rgba(239,68,68,0.5)] hover:shadow-[0_0_15px_rgba(239,68,68,0.7)]"
+
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      {user ? (
+        <div className="text-center">
+          <p className="text-xl">
+            Welcome, {user.email}! <br />
+            Wallet: {user.walletAddress}
+          </p>
+          <button
+            onClick={signOutUser}
+            className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+
           >
             Sign Out
           </button>
         </div>
       ) : (
+
         <div className="relative max-w-md w-full">
           {/* Animated Character */}
           <div
@@ -679,6 +693,64 @@ export default function Auth() {
               </p>
             )}
           </div>
+
+        <div className="flex flex-col items-center">
+          <h2 className="text-2xl font-bold mb-6">Sign Up / Sign In</h2>
+          <form className="flex flex-col space-y-4 w-80">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="p-2 rounded bg-gray-800 text-white border border-gray-700"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="p-2 rounded bg-gray-800 text-white border border-gray-700"
+            />
+            <button
+              type="button"
+              onClick={connectWallet}
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+                walletAddress ? "bg-green-500 hover:bg-green-700" : ""
+              }`}
+            >
+              {walletAddress ? "Wallet Connected" : "Connect Wallet"}
+            </button>
+            <button
+              onClick={signUp}
+              disabled={!walletAddress}
+              className={`bg-blue-500 text-white font-bold py-2 px-4 rounded ${
+                !walletAddress
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-blue-700"
+              }`}
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={signIn}
+              disabled={!walletAddress}
+              className={`bg-blue-500 text-white font-bold py-2 px-4 rounded ${
+                !walletAddress
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-blue-700"
+              }`}
+            >
+              Sign In
+            </button>
+          </form>
+          {error && <p className="mt-4 text-red-500">{error}</p>}
+          {walletAddress && (
+            <p className="mt-4 text-green-500">
+              Wallet: {walletAddress.substring(0, 6)}...
+              {walletAddress.slice(-4)}
+            </p>
+          )}
+
         </div>
       )}
     </div>
