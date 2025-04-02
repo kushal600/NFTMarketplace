@@ -36,7 +36,7 @@ function App() {
     return user ? element : <Navigate to="/" />;
   };
   return (
-    <div className="container">
+    <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Auth />} />
