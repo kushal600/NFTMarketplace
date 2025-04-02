@@ -227,10 +227,12 @@ export default function SellNFT() {
         </form>
       </div> */}
       <div className="min-h-screen bg-[#f4f4f4] flex flex-col items-center">
-        <Navbar />
-        <div className="flex flex-col items-center mt-10 w-full px-4">
+        <div>
+          <Navbar />
+        </div>
+        <div className="flex flex-col items-center justify-center mt-48 w-full px-4 ">
           <form className="bg-white rounded-lg shadow-md p-6 max-w-xl w-full">
-            <h3 className="text-center text-2xl font-bold text-purple-600 mb-8">
+            <h3 className="text-center text-2xl font-bold text-blue-600 mb-8">
               List Your NFT
             </h3>
 
@@ -241,7 +243,7 @@ export default function SellNFT() {
                 <div className="bg-gray-50 rounded-lg shadow-sm p-4">
                   <div className="flex items-center mb-2">
                     <svg
-                      className="h-5 w-5 text-purple-600 mr-2"
+                      className="h-5 w-5 text-blue-600 mr-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -254,7 +256,7 @@ export default function SellNFT() {
                       />
                     </svg>
                     <label
-                      className="text-purple-600 text-sm font-semibold"
+                      className="text-blue-600 text-sm font-semibold"
                       htmlFor="name"
                     >
                       NFT Name
@@ -275,7 +277,7 @@ export default function SellNFT() {
                 <div className="bg-gray-50 rounded-lg shadow-sm p-4">
                   <div className="flex items-center mb-2">
                     <svg
-                      className="h-5 w-5 text-purple-600 mr-2"
+                      className="h-5 w-5 text-blue-600 mr-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -288,7 +290,7 @@ export default function SellNFT() {
                       />
                     </svg>
                     <label
-                      className="text-purple-600 text-sm font-semibold"
+                      className="text-blue-600 text-sm font-semibold"
                       htmlFor="price"
                     >
                       Price (in ETH)
@@ -311,7 +313,7 @@ export default function SellNFT() {
               <div className="bg-gray-50 rounded-lg shadow-sm p-4">
                 <div className="flex items-center mb-2">
                   <svg
-                    className="h-5 w-5 text-purple-600 mr-2"
+                    className="h-5 w-5 text-blue-600 mr-2"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -324,7 +326,7 @@ export default function SellNFT() {
                     />
                   </svg>
                   <label
-                    className="text-purple-600 text-sm font-semibold"
+                    className="text-blue-600 text-sm font-semibold"
                     htmlFor="description"
                   >
                     NFT Description
@@ -351,7 +353,7 @@ export default function SellNFT() {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center">
                     <svg
-                      className="h-5 w-5 text-purple-600 mr-2"
+                      className="h-5 w-5 text-blue-600 mr-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -364,7 +366,7 @@ export default function SellNFT() {
                       />
                     </svg>
                     <label
-                      className="text-purple-600 text-sm font-semibold"
+                      className="text-blue-600 text-sm font-semibold"
                       htmlFor="image"
                     >
                       Upload Image (500 KB)
@@ -374,7 +376,7 @@ export default function SellNFT() {
                     <button
                       type="button"
                       onClick={() => setShowPreview(true)}
-                      className="text-purple-600 text-sm font-semibold hover:text-purple-800 transition-all duration-200"
+                      className="text-blue-600 text-sm font-semibold hover:text-blue-800 transition-all duration-200"
                     >
                       Preview
                     </button>
@@ -383,7 +385,7 @@ export default function SellNFT() {
                 <input
                   type="file"
                   onChange={OnChangeFile}
-                  className="w-full p-2 border-2 border-dashed border-gray-300 rounded-md text-gray-700 hover:border-purple-500 transition-all duration-200"
+                  className="w-full p-2 border-2 border-dashed border-gray-300 rounded-md text-gray-700 hover:border-blue-500 transition-all duration-200"
                 />
               </div>
             </div>
@@ -398,7 +400,7 @@ export default function SellNFT() {
             {/* List Button */}
             <button
               onClick={listNFT}
-              className="mt-8 w-full bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition-all duration-200 shadow-md"
+              className="mt-8 w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md"
               id="list-button"
             >
               List NFT
@@ -427,7 +429,7 @@ export default function SellNFT() {
                     />
                   </svg>
                 </button>
-                <h4 className="text-lg font-semibold text-purple-600 mb-4">
+                <h4 className="text-lg font-semibold text-blue-600 mb-4">
                   Image Preview
                 </h4>
                 <img

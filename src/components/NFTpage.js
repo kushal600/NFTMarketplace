@@ -6,8 +6,8 @@ import { useState, useEffect } from "react";
 import { GetIpfsUrlFromPinata } from "../utils";
 import { auth, db } from "../firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import bgImage from '../bg.png';
-import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import bgImage from "../bg.png";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { BsBagHeart } from "react-icons/bs";
 import { BsBagHeartFill } from "react-icons/bs";
 import { uploadFileToIPFS, uploadJSONToIPFS } from "../pinata";
@@ -15,8 +15,6 @@ import { uploadFileToIPFS, uploadJSONToIPFS } from "../pinata";
 // import { Card, CardContent } from "@/components/ui/card";
 // import { Button } from "@/components/ui/button";
 // // import { Link } from 'react-router-dom';
-
-
 
 export default function NFTPage(props) {
   const [bounce, setBounce] = useState(false);
@@ -27,7 +25,7 @@ export default function NFTPage(props) {
   const [user, setUser] = useState(null);
   const [isInWatchlist, setIsInWatchlist] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [newPrice, setNewPrice] = useState(""); 
+  const [newPrice, setNewPrice] = useState("");
 
   useEffect(() => {
     setBounce(true);
@@ -253,223 +251,129 @@ export default function NFTPage(props) {
     data.image = GetIpfsUrlFromPinata(data.image);
 
   return (
-    // <div style={{ "min-height": "100vh" }}>
-    //   <Navbar></Navbar>
-    //   <div className="flex ml-20 mt-20">
-    //     <img src={data.image} alt="" className="w-2/5" />
-    //     <div className="text-xl ml-20 space-y-8 text-white shadow-2xl rounded-lg border-2 p-5">
-    //       <div>Name: {data.name}</div>
-    //       <div>Description: {data.description}</div>
-    //       <div>
-    //         Price: <span className="">{data.price + " ETH"}</span>
-    //       </div>
-    //       <div>
-    //         Owner: <span className="text-sm">{data.owner}</span>
-    //       </div>
-    //       <div>
-    //         Seller: <span className="text-sm">{data.seller}</span>
-    //       </div>
-    //       <div>
-    //         {currAddress != data.owner && currAddress != data.seller ? (
-    //           <button
-    //             className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
-    //             onClick={() => buyNFT(tokenId)}
-    //           >
-    //             Buy this NFT
-    //           </button>
-    //         ) : (
-    //           <div>
-    //             <div className="text-emerald-700">
-    //               You are the owner of this NFTs
-    //             </div>{" "}
-    //             <Link to="/updateNFT">Update Price</Link>
-    //           </div>
-    //         )}
-    //         {isInWatchlist ? (
-    //           <button
-    //             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-sm"
-    //             onClick={() => removeFromWatchlist(tokenId)}
-    //           >
-    //             Remove from Watchlist
-    //           </button>
-    //         ) : (
-    //           <button
-    //             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm"
-    //             onClick={() => addToWatchlist(tokenId)}
-    //           >
-    //             Add to Watchlist
-    //           </button>
-    //         )}
-    //         <div className="text-green text-center mt-3">{message}</div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-    
-//     <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(./bg.png)' }}>
-//   <div className="h-[15vh]">
-//     <Navbar />
-//   </div>
-//   <div className="flex flex-col md:flex-row h-[85vh] max-w-7xl mx-auto px-4 py-12 md:px-8 md:py-8 ">
-//     {/* Left 50% - Image Container */}
-//     <div className="w-full md:w-1/2 flex items-center justify-center">
-//       <div className="w-full h-[70vh] md:h-[75vh] max-w-md">
-//         <img 
-//           src={data.image} 
-//           alt="Product" 
-//           className="w-full h-full object-cover rounded-lg shadow-lg border-2 border-gray-200" 
-//         />
-//       </div>
-//     </div>
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url(./bg.png)" }}
+    >
+      <div className="h-[15vh]">
+        <Navbar />
+      </div>
 
-//     {/* Right 50% - Split into Info and Buttons */}
-//     <div className="w-full md:w-1/2 flex flex-col mt-0 space-y-4 ">
-//       {/* Information - 50% of 85vh */}
-//       <div className="h-[42.5vh] bg-white p-4 py-5 md:p-6 rounded-lg shadow-xl space-y-4 overflow-hidden">
-//         <div className="font-bold text-2xl text-gray-800">{data.name}</div>
-//         <div className="text-gray-600 truncate">{data.description}</div>
-//         <div className="text-lg font-bold text-green-600">Price: {data.price} ETH</div>
-//         <div className="text-sm text-gray-500">Owner: {data.seller}</div>
-//       </div>
-
-//       {/* Buttons - 50% of 85vh */}
-//       <div className="h-[42.5vh] p-4 md:p-6  flex flex-row justify-between items-center space-x-2">
-//             {currAddress !== data.owner && currAddress !== data.seller ? (
-//               <button 
-//                 className="w-[80%]  bg-blue-600 hover:bg-blue-700 text-white shadow-xl font-semibold py-2 px-4 rounded bg-cover bg-center hover:brightness-75" 
-//                 onClick={() => buyNFT(tokenId)}
-//               >
-//                 Buy this NFT
-//               </button>
-//             ) : (
-//               <div className="w-[80%] text-emerald-700">
-//                 You are the owner of this NFT
-//                 <Link to="/updateNFT" className="ml-2 text-blue-500 underline">Update Price</Link>
-//               </div>
-//             )}
-//             {isInWatchlist ? (
-//               <button className="w-[20%]  text-white font-semibold py-2 px-4 rounded flex items-center justify-center"
-//               onClick={() => removeFromWatchlist(tokenId)}
-//               >
-//                 <BsBagHeartFill className={`text-4xl  text-red-600 hover:text-red-600 ${bounce ? 'animate-heart-bounce' : ''}`}   />
-//               </button>
-//             ) : (
-//               <button className="w-[20%] text-white font-semibold py-2 px-4 rounded flex items-center justify-center"
-//               onClick={() => addToWatchlist(tokenId)}
-//               >
-//                 <BsBagHeart className={`text-4xl  text-blue-600 hover:text-blue-600 ${bounce ? 'animate-heart-bounce' : ''}`} />
-//               </button>
-//             )}
-            
-//           </div>
-//           {message && <div className="text-green-500 text-center mt-3">{message}</div>}
-//     </div>
-//   </div>
-// </div>
-<div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(./bg.png)' }}>
-<div className="h-[15vh]">
-  <Navbar />
-</div>
-
-{/* Update Price Modal */}
-{showUpdateModal && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-      <h2 className="text-2xl font-bold mb-4">Update NFT Price</h2>
-      <form onSubmit={updateNFTPrice}>
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-2">Current Price: {data.price} ETH</label>
-          <input
-            type="number"
-            step="0.01"
-            placeholder="Enter new price (ETH)"
-            className="w-full p-2 border rounded"
-            value={newPrice}
-            onChange={(e) => setNewPrice(e.target.value)}
-          />
-        </div>
-        <div className="flex justify-end space-x-3">
-          <button
-            type="button"
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
-            onClick={() => setShowUpdateModal(false)}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            Update Price
-          </button>
-        </div>
-      </form>
-      {message && <div className="mt-3 text-center text-green-600">{message}</div>}
-    </div>
-  </div>
-)}
-
-<div className="flex flex-col md:flex-row h-[85vh] max-w-7xl mx-auto px-4 py-12 md:px-8 md:py-8">
-  {/* Left side - Image */}
-  <div className="w-full md:w-1/2 flex items-center justify-center">
-    <div className="w-full h-[70vh] md:h-[75vh] max-w-md">
-      <img 
-        src={data.image} 
-        alt="Product" 
-        className="w-full h-full object-cover rounded-lg shadow-lg border-2 border-gray-200" 
-      />
-    </div>
-  </div>
-
-  {/* Right side - Info and Buttons */}
-  <div className="w-full md:w-1/2 flex flex-col mt-0 space-y-4">
-    {/* Information */}
-    <div className="h-[42.5vh] bg-white p-4 py-5 md:p-6 rounded-lg shadow-xl space-y-4 overflow-hidden">
-      <div className="font-bold text-2xl text-gray-800">{data.name}</div>
-      <div className="text-gray-600 truncate">{data.description}</div>
-      <div className="text-lg font-bold text-green-600">Price: {data.price} ETH</div>
-      <div className="text-sm text-gray-500">Owner: {data.seller}</div>
-    </div>
-
-    {/* Buttons */}
-    <div className="h-[42.5vh] p-4 md:p-6 flex flex-row justify-between items-center space-x-2">
-      {currAddress !== data.owner && currAddress !== data.seller ? (
-        <button 
-          className="w-[80%] bg-blue-600 hover:bg-blue-700 text-white shadow-xl font-semibold py-2 px-4 rounded bg-cover bg-center hover:brightness-75" 
-          onClick={() => buyNFT(tokenId)}
-        >
-          Buy this NFT
-        </button>
-      ) : (
-        <div className="w-[80%] flex items-center">
-          <span className="text-emerald-700 mr-4">You own this NFT</span>
-          <button 
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => setShowUpdateModal(true)}
-          >
-            Update Price
-          </button>
+      {/* Update Price Modal */}
+      {showUpdateModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h2 className="text-2xl font-bold mb-4">Update NFT Price</h2>
+            <form onSubmit={updateNFTPrice}>
+              <div className="mb-4">
+                <label className="block text-gray-700 mb-2">
+                  Current Price: {data.price} ETH
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  placeholder="Enter new price (ETH)"
+                  className="w-full p-2 border rounded"
+                  value={newPrice}
+                  onChange={(e) => setNewPrice(e.target.value)}
+                />
+              </div>
+              <div className="flex justify-end space-x-3">
+                <button
+                  type="button"
+                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                  onClick={() => setShowUpdateModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  Update Price
+                </button>
+              </div>
+            </form>
+            {message && (
+              <div className="mt-3 text-center text-green-600">{message}</div>
+            )}
+          </div>
         </div>
       )}
-      {isInWatchlist ? (
-        <button 
-          className="w-[20%] text-white font-semibold py-2 px-4 rounded flex items-center justify-center"
-          onClick={() => removeFromWatchlist(tokenId)}
-        >
-          <BsBagHeartFill className={`text-4xl text-red-600 hover:text-red-600 ${bounce ? 'animate-heart-bounce' : ''}`} />
-        </button>
-      ) : (
-        <button 
-          className="w-[20%] text-white font-semibold py-2 px-4 rounded flex items-center justify-center"
-          onClick={() => addToWatchlist(tokenId)}
-        >
-          <BsBagHeart className={`text-4xl text-blue-600 hover:text-blue-600 ${bounce ? 'animate-heart-bounce' : ''}`} />
-        </button>
-      )}
+
+      <div className="flex flex-col md:flex-row h-[85vh] max-w-7xl mx-auto px-4 py-12 md:px-8 md:py-8 ">
+        {/* Left side - Image */}
+        <div className="w-full md:w-1/2 flex ">
+          <div className="w-full h-[70vh] md:h-[75vh] max-w-md shadow-xl bg-white rounded-lg border-2 border-gray-200">
+            <img
+              src={data.image}
+              alt="Product"
+              className="w-full h-full object-cover rounded-lg shadow-lg border-2 border-gray-200"
+            />
+          </div>
+        </div>
+
+        {/* Right side - Info and Buttons */}
+        <div className="w-full md:w-1/2 flex flex-col mt-0 space-y-4">
+          {/* Information */}
+          <div className="h-[42.5vh] bg-white p-4 py-5 md:p-6 rounded-lg shadow-xl space-y-4 overflow-hidden">
+            <div className="font-bold text-2xl text-gray-800">{data.name}</div>
+            <div className="text-gray-600 truncate">{data.description}</div>
+            <div className="text-lg font-bold text-green-600">
+              Price: {data.price} ETH
+            </div>
+            <div className="text-sm text-gray-500">Owner: {data.seller}</div>
+          </div>
+
+          {/* Buttons */}
+          <div className="h-[42.5vh] p-4 md:p-6 flex flex-row justify-between items-center space-x-2">
+            {currAddress !== data.owner && currAddress !== data.seller ? (
+              <button
+                className="w-[80%] bg-blue-600 hover:bg-blue-700 text-white shadow-xl font-semibold py-2 px-4 rounded bg-cover bg-center hover:brightness-75"
+                onClick={() => buyNFT(tokenId)}
+              >
+                Buy this NFT
+              </button>
+            ) : (
+              <div className="w-[80%] flex items-center">
+                <span className="text-emerald-700 mr-4">You own this NFT</span>
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => setShowUpdateModal(true)}
+                >
+                  Update Price
+                </button>
+              </div>
+            )}
+            {isInWatchlist ? (
+              <button
+                className="w-[20%] text-white font-semibold py-2 px-4 rounded flex items-center justify-center"
+                onClick={() => removeFromWatchlist(tokenId)}
+              >
+                <BsBagHeartFill
+                  className={`text-4xl text-red-600 hover:text-red-600 ${
+                    bounce ? "animate-heart-bounce" : ""
+                  }`}
+                />
+              </button>
+            ) : (
+              <button
+                className="w-[20%] text-white font-semibold py-2 px-4 rounded flex items-center justify-center"
+                onClick={() => addToWatchlist(tokenId)}
+              >
+                <BsBagHeart
+                  className={`text-4xl text-blue-600 hover:text-blue-600 ${
+                    bounce ? "animate-heart-bounce" : ""
+                  }`}
+                />
+              </button>
+            )}
+          </div>
+          {message && (
+            <div className="text-green-500 text-center mt-3">{message}</div>
+          )}
+        </div>
+      </div>
     </div>
-    {message && <div className="text-green-500 text-center mt-3">{message}</div>}
-  </div>
-</div>
-</div>
   );
 }
