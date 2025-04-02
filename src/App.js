@@ -36,7 +36,11 @@ function App() {
     return user ? element : <Navigate to="/" />;
   };
   return (
+
+   
+
     <div className="container">
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Auth />} />
