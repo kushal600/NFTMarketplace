@@ -35,8 +35,9 @@ function App() {
   const ProtectedRoute = ({ element }) => {
     return user ? element : <Navigate to="/" />;
   };
+  //removed <!-- className="container"--> from div
   return (
-    <div className="container">
+    <div >  
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Auth />} />

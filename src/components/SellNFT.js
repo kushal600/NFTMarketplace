@@ -101,7 +101,7 @@ export default function SellNFT() {
         signer
       );
 
-      //massage the params to be sent to the create NFT request
+      //message the params to be sent to the create NFT request
       const price = ethers.utils.parseUnits(formParams.price, "ether");
       let listingPrice = await contract.getListPrice();
       listingPrice = listingPrice.toString();
