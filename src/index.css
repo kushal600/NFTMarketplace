@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 body {
   margin: 0;
   /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,7 +13,12 @@ body {
   /*font-family: 'M PLUS 1p', sans-serif;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* background-image: url('./bg.png'); */
+  background: #f4f4f4;
+
   background-image: url("./bg.png");
+
   background-size: 200% 180%;
   animation-duration: 3s;
   animation-timing-function: linear;
@@ -27,6 +34,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+@layer utilities {
+  .animate-heart-bounce {
+    animation: heartBounce 0.5s ease-in-out;
+  }
+
+  @keyframes heartBounce {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.3);
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -89,3 +112,4 @@ code {
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out forwards;
 }
+
