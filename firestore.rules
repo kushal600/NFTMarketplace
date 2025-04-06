@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    match /nfts/{tokenId} {
+      allow read: if true; // Public read for NFT data
+      allow write: if request.auth != null; // Only authenticated users can write
+    }
+    match /watchlists/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
