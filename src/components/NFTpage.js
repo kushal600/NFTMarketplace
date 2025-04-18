@@ -316,9 +316,9 @@ export default function NFTPage(props) {
         {/* Right side - Info and Buttons */}
         <div className="w-full md:w-1/2 flex flex-col mt-0 space-y-4">
           {/* Information */}
-          <div className="h-[42.5vh] bg-white p-4 py-5 md:p-6 rounded-lg shadow-xl space-y-4 overflow-hidden">
+          <div className="h-[63.5vh] bg-white p-4 py-5 md:p-6 rounded-lg shadow-xl space-y-4 overflow-hidden">
             <div className="font-bold text-2xl text-gray-800">{data.name}</div>
-            <div className="text-gray-600 truncate">{data.description}</div>
+            <div className="text-gray-600">{data.description}</div>
             <div className="text-lg font-bold text-green-600">
               Price: {data.price} ETH
             </div>
@@ -326,7 +326,7 @@ export default function NFTPage(props) {
           </div>
 
           {/* Buttons */}
-          <div className="h-[42.5vh] p-4 md:p-6 flex flex-row justify-between items-center space-x-2">
+          <div className="h-[21.25vh] p-4 md:p-6 flex flex-row justify-between items-center space-x-2">
             {currAddress !== data.owner && currAddress !== data.seller ? (
               <button
                 className="w-[80%] bg-blue-600 hover:bg-blue-700 text-white shadow-xl font-semibold py-2 px-4 rounded bg-cover bg-center hover:brightness-75"
