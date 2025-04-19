@@ -23,7 +23,8 @@ Prerequisites: Node.js, MetaMask Account
    2. Go inside the project. (`cd NFTMarketplace`)
    3. Inside the functions folder copy paste the `.env` file which is provided in the compressed folder
    4. Run `npm install` to install the dependencies
-   5. Run `npm run start` to run the project. By default it runs on http://localhost:3000/
+   5. Go to functions folder by `cd functions` and run `npm install` to install the dependencies
+   6. Return to the main folder `cd ..` and Run `npm run start` to run the project. By default it runs on http://localhost:3000/
 
 3. For SignUp in the App which is mainly for receiving the Price Alert use gmail, hotmail or outlook email account. These are the account types which are integrated to send an email to the users. (ualberta.ca) account type might not recieve the email alert.
 
@@ -34,6 +35,7 @@ Prerequisites: Node.js, MetaMask Account
 1. First open the folder called "NFTProject" that is the main project folder.
 2. Inside the functions folder copy paste the `.env` file which is provided in the compressed folder
 3. Run `npm install` just to be safe.
-4. Run `npm run start`. It will run on http://localhost:3000/
+4. Go to functions folder by `cd functions` and run `npm install` to install the dependencies
+5. Return to the main folder `cd ..` and Run `npm run start` to run the project. By default it runs on http://localhost:3000/
 
 ### For SignUp in the App which is mainly for receiving the Price Alert use gmail, hotmail or outlook email account. These are the account types which are integrated to send an email to the users. (ualberta.ca) account type might not recieve the email alert.
